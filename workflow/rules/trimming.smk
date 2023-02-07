@@ -43,7 +43,7 @@ rule cutadapt_se:
     input:
         get_cutadapt_input,
     output:
-        fastq="results/trimmed/{sample}/{unit}.single.fastq.gz",
+        fastq="results/trimmed/{sample}/{unit}_single.fastq.gz",
         qc="results/trimmed/{sample}/{unit}.single.qc.txt",
     log:
         "logs/cutadapt/{sample}-{unit}.se.log",
