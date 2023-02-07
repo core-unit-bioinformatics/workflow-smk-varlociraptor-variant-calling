@@ -1,0 +1,24 @@
+[cubi.metadata]
+pid = "undefined"
+version = "1.3.0"
+
+[cubi.metadata.naming.workflow.system]
+smk="snakemake"
+nxf="nextflow"
+cwl="common-workflow-language"
+wdl="workflow-definition-language"
+
+[cubi.metadata.naming.project.type]
+dev="development"
+run="production-run"
+bmk="benchmark"
+
+[cubi.workflow]
+pid = "undefined"
+name = "varlociraptor-variant-calling"
+version = "1.0.0"
+
+[cubi.workflow.upstream]
+pid = "https://zenodo.org/record/7593958"  
+name = "dna-seq-varlociraptor"
+version = "3.19.6"
