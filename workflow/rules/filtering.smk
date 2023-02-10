@@ -61,7 +61,7 @@ rule gather_calls:
     params:
         extra="-a",
     wrapper:
-        "v1.14.1/bio/bcftools/concat"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.14.1/bio/bcftools/concat"
 
 
 rule control_fdr:
@@ -91,7 +91,7 @@ rule merge_calls:
     params:
         extra="-a",
     wrapper:
-        "v1.14.1/bio/bcftools/concat"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.14.1/bio/bcftools/concat"
 
 
 rule convert_phred_scores:

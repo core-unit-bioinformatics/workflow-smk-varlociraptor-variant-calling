@@ -89,7 +89,7 @@ rule filter_unmapped_primers:
     log:
         "logs/primers/{panel}_primers_filtered.log",
     wrapper:
-        "v1.10.0/bio/samtools/view"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.10.0/bio/samtools/view"
 
 
 rule primer_to_bed:

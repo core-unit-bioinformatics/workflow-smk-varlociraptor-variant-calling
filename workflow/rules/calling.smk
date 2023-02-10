@@ -111,4 +111,4 @@ rule bcftools_concat:
     params:
         extra="-a",  # TODO Check this
     wrapper:
-        "v1.14.1/bio/bcftools/concat"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.14.1/bio/bcftools/concat"

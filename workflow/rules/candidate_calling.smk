@@ -19,7 +19,7 @@ rule freebayes:
         ),
     threads: max(workflow.cores - 1, 1)  # use all available cores -1 (because of the pipe) for calling
     wrapper:
-        "v1.19.0/bio/freebayes"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.19.0/bio/freebayes"
 
 
 rule delly:
@@ -36,8 +36,10 @@ rule delly:
     params:
         extra=config["params"].get("delly", ""),
     threads: lambda _, input: len(input.alns)  # delly parallelizes over the number of samples
+    resources:
+        walltime="72:00:00",
     wrapper:
-        "v1.10.0/bio/delly"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.10.0/bio/delly"
 
 
 # Delly breakends lead to invalid BCFs after VEP annotation (invalid RLEN). Therefore we exclude them for now.
@@ -65,7 +67,7 @@ rule filter_offtarget_variants:
     log:
         "logs/filter_offtarget_variants/{group}.{caller}.log",
     wrapper:
-        "v1.19.1/bio/bcftools/filter"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.19.1/bio/bcftools/filter"
 
 
 rule scatter_candidates:

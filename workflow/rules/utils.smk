@@ -19,7 +19,7 @@ rule bcf_to_vcf_gz:
     log:
         "logs/bcf-to-vcf/{prefix}.log",
     wrapper:
-        "v1.10.0/bio/bcftools/view"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.10.0/bio/bcftools/view"
 
 
 rule bam_index:
@@ -30,7 +30,7 @@ rule bam_index:
     log:
         "logs/bam-index/{prefix}.log",
     wrapper:
-        "v1.10.0/bio/samtools/index"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.10.0/bio/samtools/index"
 
 
 rule tabix_known_variants:
@@ -44,4 +44,4 @@ rule tabix_known_variants:
         get_tabix_params,
     cache: "omit-software"
     wrapper:
-        "v1.12.0/bio/tabix/index"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.12.0/bio/tabix/index"

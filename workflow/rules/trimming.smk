@@ -5,7 +5,7 @@ rule get_sra:
     log:
         "logs/get-sra/{accession}.log",
     wrapper:
-        "v1.2.0/bio/sra-tools/fasterq-dump"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.2.0/bio/sra-tools/fasterq-dump"
 
 
 rule cutadapt_pipe:
@@ -36,7 +36,7 @@ rule cutadapt_pe:
         adapters=get_cutadapt_adapters,
     threads: 8
     wrapper:
-        "v1.12.0/bio/cutadapt/pe"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.12.0/bio/cutadapt/pe"
 
 
 rule cutadapt_se:
@@ -52,7 +52,7 @@ rule cutadapt_se:
         adapters=get_cutadapt_adapters,
     threads: 8
     wrapper:
-        "v1.12.0/bio/cutadapt/se"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.12.0/bio/cutadapt/se"
 
 
 rule merge_fastqs:

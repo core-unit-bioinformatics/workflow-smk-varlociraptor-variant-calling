@@ -17,8 +17,7 @@ rule annotate_candidate_variants:
         "benchmarks/vep/{group}.{caller}.{scatteritem}.annotate_candidates.tsv"
     threads: get_vep_threads()
     wrapper:
-        "v1.22.0/bio/vep/annotate"
-
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.22.0/bio/vep/annotate"		
 
 rule annotate_variants:
     input:
@@ -43,7 +42,7 @@ rule annotate_variants:
         "logs/vep/{group}.{scatteritem}.annotate.log",
     threads: get_vep_threads()
     wrapper:
-        "v1.22.0/bio/vep/annotate"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.22.0/bio/vep/annotate"
 
 
 # TODO What about multiple ID Fields?
@@ -93,4 +92,4 @@ rule gather_annotated_calls:
     params:
         extra="-a",
     wrapper:
-        "v1.14.1/bio/bcftools/concat"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.14.1/bio/bcftools/concat"

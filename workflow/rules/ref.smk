@@ -11,7 +11,7 @@ rule get_genome:
         chromosome=config["ref"].get("chromosome"),
     cache: "omit-software"
     wrapper:
-        "v1.2.0/bio/reference/ensembl-sequence"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.2.0/bio/reference/ensembl-sequence"
 
 
 rule genome_faidx:
@@ -23,7 +23,7 @@ rule genome_faidx:
         "logs/genome-faidx.log",
     cache: "omit-software"
     wrapper:
-        "v1.10.0/bio/samtools/faidx"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.10.0/bio/samtools/faidx"
 
 
 rule genome_dict:
@@ -56,7 +56,7 @@ rule get_known_variants:
         chromosome=config["ref"].get("chromosome"),
     cache: "omit-software"
     wrapper:
-        "v1.12.0/bio/reference/ensembl-variation"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.12.0/bio/reference/ensembl-variation"
 
 
 rule get_annotation_gz:
@@ -71,7 +71,7 @@ rule get_annotation_gz:
         "logs/get_annotation.log",
     cache: "omit-software"  # save space and time with between workflow caching (see docs)
     wrapper:
-        "v1.5.0/bio/reference/ensembl-annotation"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.5.0/bio/reference/ensembl-annotation"
 
 
 rule determine_coding_regions:
@@ -122,7 +122,7 @@ rule bwa_index:
         mem_mb=369000,
     cache: True
     wrapper:
-        "v1.10.0/bio/bwa/index"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.10.0/bio/bwa/index"
 
 
 rule get_vep_cache:
@@ -135,7 +135,7 @@ rule get_vep_cache:
     log:
         "logs/vep/cache.log",
     wrapper:
-        "v1.22.0/bio/vep/cache"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.22.0/bio/vep/cache"
 
 
 rule get_vep_plugins:
@@ -146,4 +146,4 @@ rule get_vep_plugins:
     log:
         "logs/vep/plugins.log",
     wrapper:
-        "v1.12.0/bio/vep/plugins"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.12.0/bio/vep/plugins"

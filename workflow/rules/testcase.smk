@@ -14,7 +14,7 @@ rule gather_observations:
     resources:
         mem_mb=10,
     wrapper:
-        "v1.16.0/bio/bcftools/concat"
+        "file:///gpfs/project/projects/medbioinf/projects/ZPM/PDAC_mouse_IonS5_run/snakemake-wrappers-copies/snakemake-wrappers-copy-v1.16.0/bio/bcftools/concat"
 
 
 rule testcase:
