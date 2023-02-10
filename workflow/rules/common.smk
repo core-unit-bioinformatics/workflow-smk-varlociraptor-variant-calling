@@ -40,6 +40,11 @@ alignmend_ending = "cram" if use_cram else "bam"
 alignmend_index_ending = "crai" if use_cram else "bai"
 alignmend_ending_index_ending = "cram.crai" if use_cram else "bam.bai"
 
+delly_excluded_regions = {
+    ("homo_sapiens", "GRCh38"): "human.hg38",
+    ("homo_sapiens", "GRCh37"): "human.hg19",
+}
+
 
 def _group_or_sample(row):
     group = row.get("group", None)
@@ -103,7 +108,6 @@ def get_heterogeneous_labels():
 
 
 def get_final_output(wildcards):
-
     final_output = expand(
         "results/qc/multiqc/{group}.html",
         group=groups,
@@ -611,14 +615,12 @@ def get_fdr_control_params(wildcards):
         "threshold", config["calling"]["fdr-control"].get("threshold", 0.05)
     )
     events = query["varlociraptor"]
-    local = (
-        "--local"
-        if query.get("local", config["calling"]["fdr-control"].get("local", False))
-        else ""
-    )
+    local = query.get("local", config["calling"]["fdr-control"].get("local", False))
+    mode = "--mode local-smart" if local else "--mode global-smart"
     return {
         "threshold": threshold,
         "events": events,
+        "mode": mode,
         "local": local,
         "filter": query.get("filter"),
     }
@@ -685,6 +687,32 @@ def get_annotation_filter_aux_files(wildcards):
         for filter in get_annotation_filter_names(wildcards)
         for name, path in get_filter_aux_entries(filter).items()
     ]
+
+
+def get_candidate_filter_expression(wildcards):
+    f = config["calling"]["filter"]["candidates"]
+    if isinstance(f, dict):
+        expression = f["expression"]
+    else:
+        expression = f
+    return expression.replace('"', '\\"')
+
+
+def get_candidate_filter_aux_files():
+    if "candidates" not in config["calling"]["filter"]:
+        return []
+    else:
+        return [path for name, path in get_filter_aux_entries("candidates").items()]
+
+
+def get_candidate_filter_aux():
+    if "candidates" not in config["calling"]["filter"]:
+        return ""
+    else:
+        return [
+            f"--aux {name} {path}"
+            for name, path in get_filter_aux_entries("candidates").items()
+        ]
 
 
 def get_varlociraptor_obs_args(wildcards, input):
@@ -816,7 +844,8 @@ def get_vembrane_config(wildcards, input):
         append_items(events, lambda x: f"INFO['PROB_{x.upper()}']", "prob: {}".format)
     append_format_field("AF", "allele frequency")
     append_format_field("DP", "read depth")
-
+    if config_output.get("short_observations", False):
+        append_format_field("SOBS", "short observations")
     if config_output.get("observations", False):
         append_format_field("OBS", "observations")
     return {"expr": join_items(parts), "header": join_items(header)}
@@ -968,3 +997,15 @@ def get_oncoprint(oncoprint_type):
             return []
 
     return inner
+
+
+def get_delly_excluded_regions():
+    custom_excluded_regions = config["calling"]["delly"].get("exclude_regions", "")
+    if custom_excluded_regions:
+        return custom_excluded_regions
+    elif delly_excluded_regions.get((species, build), False):
+        return "results/regions/{species_build}.delly_excluded.bed".format(
+            species_build=delly_excluded_regions[(species, build)]
+        )
+    else:
+        return []
